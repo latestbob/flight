@@ -45,3 +45,6 @@ Route::get('/home', 'HomeController@index')->name('home');
 /////////////////////////ADMIN ROUTES//////////////////
 
 Route::get('/admin-dashboard','AdminController@adminhome')->name('adminhome');
+//admin all customers
+
+Route::get('/admin-customers','AdminController@customer')->name('admincustomers');

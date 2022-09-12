@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\User;
 
 class AdminController extends Controller
 {
@@ -24,5 +25,12 @@ class AdminController extends Controller
     public function adminhome()
     {
         return view('admin.home');
+    }
+
+    //admin customers 
+
+    public function customer(){
+        $user = User::where('isadmin',NULL)->get();
+        return view('admin.customer',compact('user'));
     }
 }
