@@ -237,6 +237,11 @@
 
                     <!-- Page Heading -->
                     <h1 class="h3 mb-2 text-gray-800"> All Registered Customers</h1>
+                    @if(session('msg'))
+                        <div class="alert alert-success text-center">
+                            <p>{{session('msg')}}</p>
+                        </div>
+                    @endif
                    
 
                     <!-- DataTales Example -->
@@ -264,9 +269,10 @@
                                             <td>{{$customer->email}}</td>
                                             <td>{{$customer->phone}}</td>
                                             <td>{{$customer->created_at}}</td>
-                                            <form action=""method="POST">
+                                            <form action="{{route('admincustomerdelete',$customer->id)}}"method="POST">
                                             <td>
-                                                <a href=""class="btn btn-warning btn-sm">De-activate</a>
+                      
+                                               
                                               
                                                     @csrf
                                                     {{method_field('DELETE')}}

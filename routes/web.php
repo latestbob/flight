@@ -48,3 +48,7 @@ Route::get('/admin-dashboard','AdminController@adminhome')->name('adminhome');
 //admin all customers
 
 Route::get('/admin-customers','AdminController@customer')->name('admincustomers');
+
+//deactive user
+
+Route::delete('admin-customer/{id}','AdminController@customerdelete')->name('admincustomerdelete');

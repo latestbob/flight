@@ -33,4 +33,20 @@ class AdminController extends Controller
         $user = User::where('isadmin',NULL)->get();
         return view('admin.customer',compact('user'));
     }
+
+    //deactivate User
+
+    public function deactivate($id){
+        $user = User::find($id)->delete();
+
+
+
+        return back()->with('msg','User Deactivated successfully');
+        
+    }
+
+    public function customerdelete($id){
+        $user= User::find($id)->delete();
+        return back()->with('msg','User Deleted Successfully');
+    }
 }
