@@ -52,3 +52,7 @@ Route::get('/admin-customers','AdminController@customer')->name('admincustomers'
 //deactive user
 
 Route::delete('admin-customer/{id}','AdminController@customerdelete')->name('admincustomerdelete');
+
+Route::get('/admin-airlines','AdminController@airlines')->name('adminairlines');
+
+Route::post('/admin-airlines','AdminController@addairlines')->name('adminaddairline');
