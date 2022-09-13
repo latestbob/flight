@@ -52,7 +52,7 @@
 
 
 <!-- Nav Item - Pages Collapse Menu -->
-<li class="nav-item active">
+<li class="nav-item">
     <a class="nav-link " href="#">
         <i class="fas fa-users"></i>
         <span>Customers</span>
@@ -67,21 +67,12 @@
 </li>
 
 <!-- Nav Item - Utilities Collapse Menu -->
-<li class="nav-item">
-    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
-        aria-expanded="true" aria-controls="collapseUtilities">
+<li class="nav-item active">
+    <a class="nav-link ">
         <i class="fas fa-plane"></i>
         <span>Airline</span>
     </a>
-    <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
-        data-parent="#accordionSidebar">
-        <div class="bg-white py-2 collapse-inner rounded">
-           
-            <a class="collapse-item" href="">Add Airline</a>
-            <a class="collapse-item" href="">All airlines</a>
-            
-        </div>
-    </div>
+    
 </li>
 
 
@@ -286,7 +277,13 @@
                                                 </td>
 
                                                 <td>
-                                                    <a href=""class="btn btn-primary">Edit</a> - <a href=""class="btn btn-success">Add Flight</a> - <a href=""class="btn btn-danger">Delete</a>
+                                                    <form action="{{route('admindeleteairline',$air->id)}}"method="POST">
+                                                        @csrf 
+                                                        {{method_field('DELETE')}}
+
+                                                        <a data-id="{{$air->id}}" data-toggle="modal" data-target="#editModal"class="btn btn-primary editbtn">Edit</a> - <a href=""class="btn btn-success" data-toggle="modal" data-target="#exampleModal">Add Flight</a> - <button type="submit" class="btn btn-danger">Delete</button>
+                                                    </form>
+                                                    
                                                 </td>
                                             </tr>
                                         @endforeach
@@ -299,6 +296,82 @@
 
                 </div>
                 <!-- /.container-fluid -->
+
+                <!-- Button trigger modal -->
+<!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editModal">
+  Launch demo modal
+</button> -->
+
+<!-- Button trigger modal -->
+<!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+  Launch demo modal
+</button> -->
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Add Flight</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+            <form action=""method="POST">
+                @csrf
+            
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-success">Add Flight</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="editModalLabel">Edit Airline</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form action="{{route('updateairline')}}"method="POST"enctype="multipart/form-data">
+            @csrf 
+            {{method_field('PUT')}}
+
+           
+
+                        <input type="text"name="name"placeholder="Enter Airline Name"class="form-control nameinput"required>
+
+                        <input type="hidden"class="idinput"name="id"required>
+
+                        <label for="">Upload Image</label>
+                        <input type="file"name="file"class="form-control"required>
+
+                        <br>
+                        <br>
+                       
+                    
+
+
+        
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-success">Update Airline</button>
+
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
 
             </div>
             <!-- End of Main Content -->
@@ -360,6 +433,52 @@
 
     <!-- Page level custom scripts -->
     <script src="admin/js/demo/datatables-demo.js"></script>
+
+
+
+    <script>
+        //fetch edit details
+
+        function getTarget(url, id){
+
+            //try catch function
+            try {
+                fetch(`${url}${id}`).then(res=>res.json()).then(function(data){
+                    console.log(data);
+
+                    document.querySelector('.nameinput').value = data.name
+
+                    document.querySelector('.idinput').value = data.id
+
+                }).catch(function(err){
+                    console.log(err)
+                })
+            } catch (error) {
+                console.log(error)
+            }
+        }
+
+
+        //show id function
+
+        function showId(e){
+            let _id = e.target.dataset.id
+            getTarget('/admin-airline/', _id)
+        }
+
+
+        //try catch foreach
+
+        try {
+            let editModalBtns = document.querySelectorAll('.editbtn');
+
+            editModalBtns.forEach(function(editModalBtn){
+                editModalBtn.addEventListener('click' , showId)
+            })
+        } catch (error) {
+            alert(error)
+        }
+    </script>
 
 </body>
 

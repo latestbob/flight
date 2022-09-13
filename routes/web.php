@@ -56,3 +56,9 @@ Route::delete('admin-customer/{id}','AdminController@customerdelete')->name('adm
 Route::get('/admin-airlines','AdminController@airlines')->name('adminairlines');
 
 Route::post('/admin-airlines','AdminController@addairlines')->name('adminaddairline');
+
+Route::delete('/admin-airline/{id}','AdminController@deleteairline')->name('admindeleteairline');
+
+Route::get('admin-airline/{id}','AdminController@getairline')->name('getairline');
+
+Route::put('/admin-airline','AdminController@updateairline')->name('updateairline');

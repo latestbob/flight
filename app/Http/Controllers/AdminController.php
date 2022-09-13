@@ -78,4 +78,40 @@ class AdminController extends Controller
 
         return back()->with('msg','Airline Added Successfully');
     }
+
+    //Admin Delete Airline
+
+    public function deleteairline($id){
+        $airline = Airline::find($id)->delete();
+
+        return back()->with('msg','Airline Deleted Successfully');
+    }
+
+    //get specific airline 
+
+    public function getairline($id){
+        $airline = Airline::find($id);
+
+        return response()->json($airline);
+    }
+
+    //update airline
+
+    public function updateairline(Request $request){
+
+        $this->validate($request,[
+            'id'=>'required',
+            'name'=>'required',
+            'file'=>'required|mimes:jpeg,jpg,png,gif'
+        ]);
+
+        $response = cloudinary()->upload($request->file('file')->getRealPath())->getSecurePath();
+
+        $airline = Airline::where('id',$request->id)->update([
+            'name'=>$request->name,
+            'image'=>$response
+        ]);
+
+        return back()->with('msg','Airline Updated Successfully');
+    }
 }

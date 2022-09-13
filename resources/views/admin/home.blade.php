@@ -50,7 +50,7 @@
 
             <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
-                <a class="nav-link " href="#">
+                <a class="nav-link " href="{{route('admincustomers')}}">
                     <i class="fas fa-users"></i>
                     <span>Customers</span>
                 </a>
@@ -65,20 +65,11 @@
 
             <!-- Nav Item - Utilities Collapse Menu -->
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
-                    aria-expanded="true" aria-controls="collapseUtilities">
+                <a class="nav-link" href="{{route('adminairlines')}}">
                     <i class="fas fa-plane"></i>
                     <span>Airline</span>
                 </a>
-                <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
-                    data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                       
-                        <a class="collapse-item" href="">Add Airline</a>
-                        <a class="collapse-item" href="">All airlines</a>
-                        
-                    </div>
-                </div>
+               
             </li>
 
            
